@@ -13,28 +13,28 @@ import (
 )
 
 type MyAggResult struct {
-	Id 			string 			`bson:"_id"`
-	TotalTips 	float64 		`bson:"total_tips"`
-	PickupArea 	[]string 		`bson:"pickup_area"`
+	Id         string   `bson:"_id"`
+	TotalTips  float64  `bson:"total_tips"`
+	PickupArea []string `bson:"pickup_area"`
 }
 
 func main() {
 	mongoURI := os.Getenv("URI")
 
-    if len(mongoURI) == 0 {
-        panic("No URI")
+	if len(mongoURI) == 0 {
+		panic("No URI")
 	}
-	
+
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	iteration := 0
 
-	for{
+	for {
 
 		fmt.Printf("Iteration %v\n", iteration)
-
-		client, err := mongo.NewClient(options.Client().ApplyURI(mongoURI))
-		if err != nil {
-			log.Fatal(err)
-		}
 
 		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 		defer cancel()
