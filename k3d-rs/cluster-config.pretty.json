@@ -154,7 +154,7 @@
           "priority": 1,
           "votes": 1,
 	  "horizons": {
-            "test-horizon-1": "oc01.jalder.net:30017"
+            "test-horizon-1": "k3d-k3s-default-worker-0:30017"
           }
         },
         {
@@ -163,7 +163,7 @@
           "priority": 1,
           "votes": 1,
  	  "horizons": {
-            "test-horizon-1": "oc02.jalder.net:30018"
+            "test-horizon-1": "k3d-k3s-default-worker-1:30018"
 	  }
         },
         {
@@ -172,7 +172,7 @@
           "priority": 1,
           "votes": 1,
  	  "horizons": {
-            "test-horizon-1": "oc01.jalder.net:30019"
+            "test-horizon-1": "k3d-k3s-default-worker-2:30019"
           }
 	}
       ],

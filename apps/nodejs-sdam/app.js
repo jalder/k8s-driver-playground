@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://localhost:31000,localhost:31001/?replicaSet=rs';
+const url = 'mongodb://root:password@k3d-k3s-default-worker-0:30017,k3d-k3s-default-worker-1:30018,k3d-k3s-default-worker-0:30019/?replicaSet=test-db';
 const client = new MongoClient(url);
 
 client.on('serverDescriptionChanged', function(event) {
