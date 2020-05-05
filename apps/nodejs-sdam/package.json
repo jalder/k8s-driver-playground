@@ -1,0 +1,13 @@
+{
+  "name": "nodejs_sdam_docker",
+  "version": "0.0.1",
+  "description": "Simple SDAM in Docker",
+  "author": "Jack Alder <jack.alder@mongodb.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "mongodb": "^3.5.1"
+  }
+}
