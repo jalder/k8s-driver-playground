@@ -16,6 +16,19 @@ spec:
         name: test-db
         app: mongodb
     spec:
+      initContainers:
+      - name: get-certs
+        image: cfssl/cfssl
+        command: ['/bin/cfssl','']
+      - name: tune-db
+        image: alpine
+        command: ['sh','-c', 'sed "s/default/$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)/g" /var/lib/mongodb-automation/cluster-config.json > /tmp/cluster-config.json']
+        #command: ['sh','-c', 'apk update && apk add jq && /usr/bin/jq ".processes[].hostname  |= \"$(hostname -f)\"" /var/lib/mongodb-automation/cluster-config.json > /tmp/cluster-config.json']
+        volumeMounts:
+        - mountPath: /tmp/
+          name: config-vol
+        - mountPath: /var/lib/mongodb-automation/
+          name: cluster-config
       containers:
       - name: test-db
         image: quay.io/mongodb/mongodb-enterprise-appdb:10.2.15.5958-1
@@ -28,9 +41,11 @@ spec:
           value: "test-db-config"
         volumeMounts:
         - mountPath: /var/lib/mongodb-automation/
-          name: cluster-config
+          name: config-vol
           readOnly: true
       volumes:
+      - name: config-vol
+        emptyDir: {}
       - configMap:
           defaultMode: 420
           name: test-db-config
