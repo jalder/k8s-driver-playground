@@ -77,8 +77,12 @@
     {
       "args2_6": {
         "net": {
-          "port": 27017
-        },
+          "port": 27017,
+ 	  "ssl": {
+            "PEMKeyFile": "/var/certs/server.pem",
+	    "mode": "allowSSL"
+          }
+       },
         "replication": {
           "replSetName": "test-db"
         },
@@ -100,8 +104,12 @@
     {
       "args2_6": {
         "net": {
-          "port": 27017
-        },
+          "port": 27017,
+ 	  "ssl": {
+            "PEMKeyFile": "/var/certs/server.pem",
+	    "mode": "allowSSL"
+          }
+       },
         "replication": {
           "replSetName": "test-db"
         },
@@ -123,7 +131,11 @@
     {
       "args2_6": {
         "net": {
-          "port": 27017
+          "port": 27017,
+	  "ssl": {
+            "PEMKeyFile": "/var/certs/server.pem",
+	    "mode": "allowSSL"
+          }
         },
         "replication": {
           "replSetName": "test-db"
@@ -181,7 +193,7 @@
   ],
   "sharding": [],
   "ssl": {
-    "CAFilePath": "/mongodb-automation/ca.pem",
+    "CAFilePath": "/var/run/secrets/kubernetes.io/serviceaccount/..data/ca.crt",
     "clientCertificateMode": "OPTIONAL"
   },
   "version": 1

@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://root:password@k3d-k3s-default-worker-0:30017,k3d-k3s-default-worker-1:30018,k3d-k3s-default-worker-0:30019/?replicaSet=test-db';
-const client = new MongoClient(url);
+const url = 'mongodb://root:password@oc01.jalder.net:30017/admin?replicaSet=test-db&ssl=true';
+const client = new MongoClient(url, {server:{sslValidate:false}});
 
 client.on('serverDescriptionChanged', function(event) {
   console.log('received serverDescriptionChanged');

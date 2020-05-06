@@ -17,9 +17,6 @@ spec:
         app: mongodb
     spec:
       initContainers:
-      - name: get-certs
-        image: cfssl/cfssl
-        command: ['/bin/cfssl','']
       - name: tune-db
         image: alpine
         command: ['sh','-c', 'sed "s/default/$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)/g" /var/lib/mongodb-automation/cluster-config.json > /tmp/cluster-config.json']
@@ -40,10 +37,16 @@ spec:
         - name: AUTOMATION_CONFIG_MAP
           value: "test-db-config"
         volumeMounts:
+        - mountPath: /var/certs
+          name: server-pem
+          readOnly: true
         - mountPath: /var/lib/mongodb-automation/
           name: config-vol
           readOnly: true
       volumes:
+      - name: server-pem
+        secret:
+          secretName: server-pem
       - name: config-vol
         emptyDir: {}
       - configMap:
